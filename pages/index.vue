@@ -24,7 +24,6 @@ import popIcon from '../assets/sound/popUp2.mp3'
 
 import homeDefaultImg from '../assets/img/homeDefault.png'
 import homeHoverImg from '../assets/img/homeHover.png'
-import homeBingungImg from '../assets/img/homeBingung.png'
 
 import { useSound } from '@vueuse/sound'
 import { reactive } from 'vue';
