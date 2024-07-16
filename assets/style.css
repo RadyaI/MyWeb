@@ -40,16 +40,20 @@
   letter-spacing: -5px;
 }
 
+.text-bg h3{
+  display: none;
+}
+
 .text-bg .bg-1{
-  border: 1px solid white;
+  /* border: 1px solid white; */
   width: 450px;
   height: 500px;
 }
 
 .text-bg .bg-2{
-  border: 1px solid white;
+  /* border: 1px solid white; */
   width: 200px;
-  height: 550px;
+  height: 570px;
   display: flex;
   align-items: flex-end;
 }
@@ -70,18 +74,20 @@
   100% {width: 200px;}
 }
 
-.text-bg .bg-2 .dialog{
+.text-bg .bg-2 .dialog-right{
   border: 1px solid white;
   color: var(--text-color);
-  min-width: 200px;
+  text-align: center;
+  min-width: 150px;
   width: fit-content;
-  padding: 0 10px;
+  padding: 5px 10px;
   margin-left: -20px;
-  margin-bottom: 100px;
+  margin-bottom: 150px;
+  border-radius: 10px 10px 10px 0;
 }
 
 .text-bg .bg-3{
-  border: 1px solid white;
+  /* border: 1px solid white; */
   width: 450px;
   height: 500px;
 }
@@ -93,4 +99,11 @@
   .text-bg .bg-1{display: none;}
   .text-bg .bg-2{display: none;}
   .text-bg .bg-3{display: none;}
+
+  .text-bg h3{
+    display: block;
+    color: var(--text-color);
+    margin-top: 130px;
+    font-size: 30px;
+  }
 }
