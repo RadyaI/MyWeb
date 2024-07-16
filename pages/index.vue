@@ -19,11 +19,11 @@
 </template>
 
 <script setup>
-import popUp1 from '../assets/sound/popUp1.mp3'
-import popIcon from '../assets/sound/popUp2.mp3'
+import popUp1 from '@/assets/sound/popUp1.mp3'
+import popIcon from '@/assets/sound/popUp2.mp3'
 
-import homeDefaultImg from '../assets/img/homeDefault.png'
-import homeHoverImg from '../assets/img/homeHover.png'
+import homeDefaultImg from '@/assets/img/homeDefault.png'
+import homeHoverImg from '@/assets/img/homeHover.png'
 
 import { useSound } from '@vueuse/sound'
 import { reactive } from 'vue';
