@@ -14,17 +14,15 @@
                         </div>
                         <div class="card">
                             <div class="stack">
-                                <img :src="jsIcon" alt="js"
-                                    @mouseover="handleMouseOver('Javascript'), play()"
+                                <img :src="jsIcon" alt="js" @mouseover="handleMouseOver('Javascript'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
                             <div class="stack">
-                                <img :src="nuxtIcon" alt="nuxt" @mouseover="handleMouseOver('Nuxt'), play()"
+                                <img :src="nuxtIcon" alt="nuxt" @mouseover="handleMouseOver('I love nuxt'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
                             <div class="stack">
-                                <img :src="firebaseIcon" alt="firebase"
-                                    @mouseover="handleMouseOver('Firebase'), play()"
+                                <img :src="firebaseIcon" alt="firebase" @mouseover="handleMouseOver('Firebase'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
                         </div>
@@ -33,7 +31,8 @@
                         </div>
                     </div>
                     <div class="bg-2" v-if="state.stopSlide">
-                        <img :src="state.img.homeDefault" :class="{ 'img-bounce': state.img.bounceImgDefault }" alt=""
+                        <img :src="state.img.homeDefault"
+                            :class="{ 'img-bounce': state.img.bounceImgDefault, 'flip': state.logoBounce || state.blogUp }" alt=""
                             @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
                             @mouseleave="handleMouseLeave(), stop()">
                         <div class="dialog-right" v-if="state.dialog">
@@ -41,9 +40,29 @@
                         </div>
                     </div>
                     <div class="bg-3">
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <div class="medsos">
+                            <div class="row">
+                                <div class="logo ig" :class="{ 'bounce': state.logoBounce == 'ig' }"
+                                    @mouseover="logoHandle('Follow me on Instagram :)', 'ig')"
+                                    @mouseleave="stopLogoHandle()"><i class="bi bi-instagram"></i></div>
+                                <div class="logo tiktok" :class="{ 'bounce': state.logoBounce == 'tiktok' }"
+                                    @mouseover="logoHandle('I make coding timelapse videos', 'tiktok')"
+                                    @mouseleave="stopLogoHandle()"><i class="bi bi-tiktok"></i></div>
+                                <div class="logo github" :class="{ 'bounce': state.logoBounce == 'github' }"
+                                    @mouseover="logoHandle(`Don't judge my GH stats ^^`, 'github')"
+                                    @mouseleave="stopLogoHandle()"><i class="bi bi-github"></i></div>
+                            </div>
+                            <div class="wood">
+                                <div class="wood2"></div>
+                            </div>
+                        </div>
+                        <div class="blog" :class="{ 'blogUp': state.blogUp }">
+                            <div class="blog-bg">
+                                <div class="text" @mouseover="blogHandle(), play()"
+                                    @mouseleave="stopBlogHandle(), stop()">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -62,6 +81,7 @@ import nuxtIcon from '../public/img/nuxt.png'
 import jsIcon from '../public/img/javascript.png'
 import firebaseIcon from '../public/img/firebase.png'
 
+
 import pcDesk from '@/public/gif/pcDesk.gif'
 import pcDeskThumb from '@/public/gif/pcDeskThumb.png'
 
@@ -72,6 +92,9 @@ import Loading from '../components/loading.vue'
 
 useHead({
     title: 'Radya - Home',
+    link: [
+        { rel: 'icon', type: 'image/png', href: homeAboutMe }
+    ],
     meta: [
         { name: 'description', content: 'Hi!, Welcome to radya personal website' },
         { name: 'keyword', content: "radya, personalweb" },
@@ -109,12 +132,39 @@ function handleMouseLeave() {
 
 function animatePc() {
     state.img.pcDesk = pcDesk
+    state.dialog = "Want to see what I made?"
+    state.img.homeDefault = homeHoverImg
     play()
 }
 
-function stopAnimatePc(){
+function stopAnimatePc() {
     state.img.pcDesk = pcDeskThumb
+    state.img.homeDefault = homeDefaultImg
     stop()
+}
+
+function logoHandle(dialog, icon) {
+    state.logoBounce = icon
+    state.dialog = dialog
+    state.img.homeDefault = homeHoverImg
+    play()
+}
+
+function stopLogoHandle() {
+    state.logoBounce = false
+    state.dialog = null
+    state.img.homeDefault = homeDefaultImg
+    stop()
+}
+
+function blogHandle() {
+    state.blogUp = true
+    state.dialog = "I also write a blog"
+}
+
+function stopBlogHandle() {
+    state.blogUp = false
+    state.dialog = null
 }
 
 onMounted(() => {
