@@ -6,7 +6,7 @@
 
 <style scoped>
 .bg {
-    z-index: 999;
+    z-index: 99;
     width: 100wh;
     height: 100vh;
     background-color: white;

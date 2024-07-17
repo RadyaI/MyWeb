@@ -7,15 +7,38 @@
                     <h2>DEVELOPER</h2>
                     <h3>Radya.</h3>
                     <div class="bg-1">
-                        <div>
-                            <img :src="state.img.homeAboutMe" alt="about me" @mouseover="handleMouseOver('About me?'), play()" @mouseleave="handleMouseLeave(), stop()">
+                        <div class="card">
+                            <img :class="{ swing: state.img.swingImg }" :src="state.img.homeAboutMe" alt="about me"
+                                @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
+                                @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false">
                         </div>
-                        <div></div>
-                        <div></div>
+                        <div class="card">
+                            <div class="stack">
+                                <img :src="jsIcon" alt="js"
+                                    @mouseover="handleMouseOver('Javascript'), play()"
+                                    @mouseleave="handleMouseLeave(), stop()">
+                            </div>
+                            <div class="stack">
+                                <img :src="nuxtIcon" alt="nuxt" @mouseover="handleMouseOver('Nuxt'), play()"
+                                    @mouseleave="handleMouseLeave(), stop()">
+                            </div>
+                            <div class="stack">
+                                <img :src="firebaseIcon" alt="firebase"
+                                    @mouseover="handleMouseOver('Firebase'), play()"
+                                    @mouseleave="handleMouseLeave(), stop()">
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img :src="pc" alt="" :class="{ 'bounce': state.img.bouncePc }"
+                                @mouseover="handleMouseOver('Want to see my project?'), play(), state.img.bouncePc = true"
+                                @mouseleave="handleMouseLeave(), stop(), state.img.bouncePc = false">
+                            <img :src="desk" alt="">
+                        </div>
                     </div>
                     <div class="bg-2" v-if="state.stopSlide">
                         <img :src="state.img.homeDefault" :class="{ 'img-bounce': state.img.bounceImgDefault }" alt=""
-                            @mouseover="handleMouseOver('Hi! Aku Radya'), play()" @mouseleave="handleMouseLeave(), stop()">
+                            @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
+                            @mouseleave="handleMouseLeave(), stop()">
                         <div class="dialog-right" v-if="state.dialog">
                             <p>{{ state.dialog }}</p>
                         </div>
@@ -33,11 +56,17 @@
 
 <script setup>
 import popUp1 from '@/assets/sound/popUp1.mp3'
-import popIcon from '@/assets/sound/popUp2.mp3'
 
 import homeDefaultImg from '@/assets/img/homeDefault.png'
 import homeHoverImg from '@/assets/img/homeHover.png'
 import homeAboutMe from '@/assets/img/homeAboutMe.png'
+
+import nuxtIcon from '../assets/img/nuxt.png'
+import jsIcon from '../assets/img/javascript.png'
+import firebaseIcon from '../assets/img/firebase.png'
+
+import desk from '../assets/img/workDesk.png'
+import pc from '../assets/img/workPc.png'
 
 import { useSound } from '@vueuse/sound'
 import { onMounted, reactive } from 'vue';
@@ -57,6 +86,8 @@ const state = reactive({
     title: "Radya",
     dialog: null,
     img: {
+        swingImg: true,
+        bouncePc: false,
         bounceImgDefault: false,
         homeDefault: homeDefaultImg,
         homeAboutMe: homeAboutMe
