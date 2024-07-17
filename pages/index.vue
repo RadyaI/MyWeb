@@ -57,16 +57,16 @@
 <script setup>
 import popUp1 from '@/assets/sound/popUp1.mp3'
 
-import homeDefaultImg from '@/assets/img/homeDefault.png'
-import homeHoverImg from '@/assets/img/homeHover.png'
-import homeAboutMe from '@/assets/img/homeAboutMe.png'
+import homeDefaultImg from '@/public/img/homeDefault.png'
+import homeHoverImg from '@/public/img/homeHover.png'
+import homeAboutMe from '@/public/img/homeAboutMe.png'
 
-import nuxtIcon from '../assets/img/nuxt.png'
-import jsIcon from '../assets/img/javascript.png'
-import firebaseIcon from '../assets/img/firebase.png'
+import nuxtIcon from '../public/img/nuxt.png'
+import jsIcon from '../public/img/javascript.png'
+import firebaseIcon from '../public/img/firebase.png'
 
-import desk from '../assets/img/workDesk.png'
-import pc from '../assets/img/workPc.png'
+import desk from '../public/img/workDesk.png'
+import pc from '../public/img/workPc.png'
 
 import { useSound } from '@vueuse/sound'
 import { onMounted, reactive } from 'vue';

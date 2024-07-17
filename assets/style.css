@@ -180,7 +180,7 @@
 @keyframes stick{
   0% { margin-bottom: 1000px;}
   60% { margin-bottom: -120px;}
-  100% { margin-bottom: 0; }
+  100% { margin-bottom: 0; }  
 }
 
 .text-bg .bg-2 img{
@@ -190,8 +190,7 @@
 
 .img-bounce{
   width: 200px;
-  transform: scaleX(-1);
-  animation: img2 0.5s;
+  animation: img2 1s;
 }
 
 @keyframes img2 {
