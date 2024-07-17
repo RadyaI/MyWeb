@@ -29,10 +29,7 @@
                             </div>
                         </div>
                         <div class="card">
-                            <img :src="pc" alt="" :class="{ 'bounce': state.img.bouncePc }"
-                                @mouseover="handleMouseOver('Want to see my project?'), play(), state.img.bouncePc = true"
-                                @mouseleave="handleMouseLeave(), stop(), state.img.bouncePc = false">
-                            <img :src="desk" alt="">
+                            <img :src="state.img.pcDesk" alt="" @mouseover="animatePc()" @mouseleave="stopAnimatePc()">
                         </div>
                     </div>
                     <div class="bg-2" v-if="state.stopSlide">
@@ -65,8 +62,9 @@ import nuxtIcon from '../public/img/nuxt.png'
 import jsIcon from '../public/img/javascript.png'
 import firebaseIcon from '../public/img/firebase.png'
 
-import desk from '../public/img/workDesk.png'
-import pc from '../public/img/workPc.png'
+import pcDesk from '@/public/gif/pcDesk.gif'
+import pcDeskThumb from '@/public/gif/pcDeskThumb.png'
+
 
 import { useSound } from '@vueuse/sound'
 import { onMounted, reactive } from 'vue';
@@ -87,10 +85,11 @@ const state = reactive({
     dialog: null,
     img: {
         swingImg: true,
-        bouncePc: false,
         bounceImgDefault: false,
         homeDefault: homeDefaultImg,
-        homeAboutMe: homeAboutMe
+        homeAboutMe: homeAboutMe,
+
+        pcDesk: pcDeskThumb
     }
 })
 
@@ -106,6 +105,16 @@ function handleMouseLeave() {
     state.img.homeDefault = homeDefaultImg
     state.img.bounceImgDefault = false
     state.dialog = null
+}
+
+function animatePc() {
+    state.img.pcDesk = pcDesk
+    play()
+}
+
+function stopAnimatePc(){
+    state.img.pcDesk = pcDeskThumb
+    stop()
 }
 
 onMounted(() => {

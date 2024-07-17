@@ -142,30 +142,14 @@
   margin-bottom: 50px;
 }
 
-.text-bg .bg-1 .card:nth-child(3) img:nth-child(1){
-  width: 180px;
-  cursor: pointer;
-  margin-right: 100px;
-}
 
-.bounce {
-  position: absolute;
-  top: 59%;
-  animation: bounce 0.5s cubic-bezier(.28, .84, .42, 1);
-}
-
-@keyframes bounce {
-  0% { top: 59%; }
-  50% { top: 56%; }
-  100% { top: 59%; }
-}
-
-.text-bg .bg-1 .card:nth-child(3) img:nth-child(2){
+.text-bg .bg-1 .card:nth-child(3) img{
   width: 250px;
   margin-right: 100px;
   z-index: 2;
   position: absolute;
-  top: 81%;
+  top: 63%;
+  cursor: pointer;
 }
 
 .text-bg .bg-2{
