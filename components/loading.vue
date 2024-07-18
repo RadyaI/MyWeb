@@ -9,9 +9,9 @@
     z-index: 99;
     width: 100wh;
     height: 100vh;
-    background-color: white;
+    background-color: whitesmoke;
     margin-left: 1300px;
-    animation: slide 1s;
+    animation: slide 0.5s;
 }
 
 @keyframes slide {

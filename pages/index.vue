@@ -8,32 +8,36 @@
                     <h3>Radya.</h3>
                     <div class="bg-1">
                         <div class="card">
-                            <img :class="{ swing: state.img.swingImg }" :src="state.img.homeAboutMe" alt="about me"
-                                @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
-                                @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false">
+                            <nuxt-link to="/about"> <img :class="{ swing: state.img.swingImg }"
+                                    :src="state.img.homeAboutMe" alt="about me"
+                                    @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
+                                    @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false"></nuxt-link>
                         </div>
                         <div class="card">
-                            <div class="stack">
-                                <img :src="jsIcon" alt="js" @mouseover="handleMouseOver('Javascript'), play()"
+                            <div class="stack"
+                                @click="toPage('https://developer.mozilla.org/en-US/docs/Web/JavaScript')">
+                                <img :src="jsIcon" alt="js" @mouseover="handleMouseOver('Just javascript'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
-                            <div class="stack">
+                            <div class="stack" @click="toPage('https://nuxt.com')">
                                 <img :src="nuxtIcon" alt="nuxt" @mouseover="handleMouseOver('I love nuxt'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
-                            <div class="stack">
-                                <img :src="firebaseIcon" alt="firebase" @mouseover="handleMouseOver('Firebase'), play()"
+                            <div class="stack" @click="toPage('https://firebase.com')">
+                                <img :src="firebaseIcon" alt="firebase"
+                                    @mouseover="handleMouseOver('I like using NOSQL database'), play()"
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
                         </div>
                         <div class="card">
-                            <img :src="state.img.pcDesk" alt="" @mouseover="animatePc()" @mouseleave="stopAnimatePc()">
+                            <img :src="state.img.pcDesk" alt="" @mouseover="animatePc()" @mouseleave="stopAnimatePc()"
+                                @click="toWork()">
                         </div>
                     </div>
                     <div class="bg-2" v-if="state.stopSlide">
                         <img :src="state.img.homeDefault"
-                            :class="{ 'img-bounce': state.img.bounceImgDefault, 'flip': state.logoBounce || state.blogUp }" alt=""
-                            @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
+                            :class="{ 'img-bounce': state.img.bounceImgDefault, 'flip': state.logoBounce || state.blogUp }"
+                            alt="" @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
                             @mouseleave="handleMouseLeave(), stop()">
                         <div class="dialog-right" v-if="state.dialog">
                             <p>{{ state.dialog }}</p>
@@ -43,12 +47,15 @@
                         <div class="medsos">
                             <div class="row">
                                 <div class="logo ig" :class="{ 'bounce': state.logoBounce == 'ig' }"
+                                    @click="toPage('https://instagram.com/radyaif')"
                                     @mouseover="logoHandle('Follow me on Instagram :)', 'ig')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-instagram"></i></div>
                                 <div class="logo tiktok" :class="{ 'bounce': state.logoBounce == 'tiktok' }"
+                                    @click="toPage('https://tiktok.com/@r4dy.a')"
                                     @mouseover="logoHandle('I make coding timelapse videos', 'tiktok')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-tiktok"></i></div>
                                 <div class="logo github" :class="{ 'bounce': state.logoBounce == 'github' }"
+                                    @click="toPage('https://github.com/RadyaI')"
                                     @mouseover="logoHandle(`Don't judge my GH stats ^^`, 'github')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-github"></i></div>
                             </div>
@@ -56,7 +63,8 @@
                                 <div class="wood2"></div>
                             </div>
                         </div>
-                        <div class="blog" :class="{ 'blogUp': state.blogUp }">
+                        <div class="blog" :class="{ 'blogUp': state.blogUp }"
+                            @click="toPage('https://medium.com/@radyaiftikhar')">
                             <div class="blog-bg">
                                 <div class="text" @mouseover="blogHandle(), play()"
                                     @mouseleave="stopBlogHandle(), stop()">
@@ -89,6 +97,7 @@ import pcDeskThumb from '@/public/gif/pcDeskThumb.png'
 import { useSound } from '@vueuse/sound'
 import { onMounted, reactive } from 'vue';
 import Loading from '../components/loading.vue'
+import { useRouter } from 'vue-router'
 
 useHead({
     title: 'Radya - Home',
@@ -102,6 +111,8 @@ useHead({
         { name: 'robots', content: "index, allow" }
     ]
 })
+
+const router = useRouter()
 
 const state = reactive({
     title: "Radya",
@@ -140,6 +151,7 @@ function animatePc() {
 function stopAnimatePc() {
     state.img.pcDesk = pcDeskThumb
     state.img.homeDefault = homeDefaultImg
+    state.dialog = null
     stop()
 }
 
@@ -167,10 +179,18 @@ function stopBlogHandle() {
     state.dialog = null
 }
 
+function toWork() {
+    router.push('/work')
+}
+
+function toPage(link) {
+    window.open(link, '_blank')
+}
+
 onMounted(() => {
     setTimeout(() => {
         state.stopSlide = true
-    }, 1200);
+    }, 500);
 })
 
 </script>
