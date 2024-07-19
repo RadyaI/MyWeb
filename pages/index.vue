@@ -44,8 +44,8 @@
                                 alt="" @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
                                 @mouseleave="handleMouseLeave(), stop()">
                         </span>
-                        <div class="dialog-right animate__animated" :class="{ 'animate__bounceOutDown': state.onSwitch }"
-                            v-if="state.dialog">
+                        <div class="dialog-right animate__animated"
+                            :class="{ 'animate__bounceOutDown': state.onSwitch }" v-if="state.dialog">
                             <p>{{ state.dialog }}</p>
                         </div>
                     </div>
@@ -71,12 +71,13 @@
                                 <div class="wood2"></div>
                             </div>
                         </div>
-                        <div class="blog animate__animated animate__bounceInUp"
-                            :class="{ 'blogUp': state.blogUp, 'animate__bounceOutDown': state.onSwitch }"
-                            @click="toPage('https://medium.com/@radyaiftikhar')">
-                            <div class="blog-bg">
-                                <div class="text" @mouseover="blogHandle(), play()"
-                                    @mouseleave="stopBlogHandle(), stop()">
+                        <div class="cover animate__animated animate__bounceInUp"
+                            :class="{ 'animate__bounceOutDown': state.onSwitch }">
+                            <div class="blog" :class="{ 'blogUp': state.blogUp, }"
+                                @click="toPage('https://medium.com/@radyaiftikhar')">
+                                <div class="blog-bg">
+                                    <div class="text" @mouseover="blogHandle()" @mouseleave="stopBlogHandle()">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -182,11 +183,13 @@ function stopLogoHandle() {
 function blogHandle() {
     state.blogUp = true
     state.dialog = "I also write a blog"
+    play()
 }
 
 function stopBlogHandle() {
     state.blogUp = false
     state.dialog = null
+    stop()
 }
 
 function toWork() {
