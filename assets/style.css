@@ -134,7 +134,7 @@
   margin-right: 100px;
   z-index: 2;
   position: absolute;
-  top: 63%;
+  top: 20%;
   cursor: pointer;
 }
 
@@ -229,8 +229,8 @@
   background-color: #444444;
 }
 
-.bounce{
-  animation: bounce 0.5s;
+.jump{
+  animation: jump 0.5s;
 }
 
 .flip {
@@ -238,7 +238,7 @@
   transition: transform 0.2s;
 }
 
-@keyframes bounce {
+@keyframes jump {
   0%, 100% {
     transform: translateY(0);
   }

@@ -6,14 +6,16 @@
                 <div class="text-bg">
                     <h2>DEVELOPER</h2>
                     <h3>Radya.</h3>
-                    <div class="bg-1">
-                        <div class="card">
-                            <nuxt-link to="/about"> <img :class="{ swing: state.img.swingImg }"
-                                    :src="state.img.homeAboutMe" alt="about me"
-                                    @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
-                                    @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false"></nuxt-link>
+                    <div class="bg-1" v-if="state.stopSlide">
+                        <div class="card animate__animated animate__bounceInDown"
+                            :class="{ 'animate__bounceOutUp': state.onSwitch }"> <img
+                                :class="{ 'swing': state.img.swingImg }" :src="state.img.homeAboutMe" alt="about me"
+                                @click="switchPage('about')"
+                                @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
+                                @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false">
                         </div>
-                        <div class="card">
+                        <div class="card animate__animated animate__bounceInLeft"
+                            :class="{ 'animate__bounceOutLeft': state.onSwitch }">
                             <div class="stack"
                                 @click="toPage('https://developer.mozilla.org/en-US/docs/Web/JavaScript')">
                                 <img :src="jsIcon" alt="js" @mouseover="handleMouseOver('Just javascript'), play()"
@@ -29,41 +31,48 @@
                                     @mouseleave="handleMouseLeave(), stop()">
                             </div>
                         </div>
-                        <div class="card">
+                        <div class="card animate__animated animate__bounceInUp"
+                            :class="{ 'animate__bounceOutDown': state.onSwitch }">
                             <img :src="state.img.pcDesk" alt="" @mouseover="animatePc()" @mouseleave="stopAnimatePc()"
                                 @click="toWork()">
                         </div>
                     </div>
                     <div class="bg-2" v-if="state.stopSlide">
-                        <img :src="state.img.homeDefault"
-                            :class="{ 'img-bounce': state.img.bounceImgDefault, 'flip': state.logoBounce || state.blogUp }"
-                            alt="" @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
-                            @mouseleave="handleMouseLeave(), stop()">
-                        <div class="dialog-right" v-if="state.dialog">
+                        <span class="animate__animated" :class="{ 'animate__bounceOutDown': state.onSwitch }">
+                            <img :src="state.img.homeDefault"
+                                :class="{ 'img-bounce': state.img.bounceImgDefault, 'flip': state.logoBounce || state.blogUp }"
+                                alt="" @mouseover="handleMouseOver(`Hi I'm Radya`), play()"
+                                @mouseleave="handleMouseLeave(), stop()">
+                        </span>
+                        <div class="dialog-right animate__animated" :class="{ 'animate__bounceOutDown': state.onSwitch }"
+                            v-if="state.dialog">
                             <p>{{ state.dialog }}</p>
                         </div>
                     </div>
-                    <div class="bg-3">
+                    <div class="bg-3" v-if="state.stopSlide">
                         <div class="medsos">
-                            <div class="row">
-                                <div class="logo ig" :class="{ 'bounce': state.logoBounce == 'ig' }"
+                            <div class="row animate__animated animate__bounceInDown"
+                                :class="{ 'animate__bounceOutUp': state.onSwitch }">
+                                <div class="logo ig" :class="{ 'jump': state.logoBounce == 'ig' }"
                                     @click="toPage('https://instagram.com/radyaif')"
-                                    @mouseover="logoHandle('Follow me on Instagram :)', 'ig')"
+                                    @mouseenter="logoHandle('Follow me on Instagram :)', 'ig')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-instagram"></i></div>
-                                <div class="logo tiktok" :class="{ 'bounce': state.logoBounce == 'tiktok' }"
+                                <div class="logo tiktok" :class="{ 'jump': state.logoBounce == 'tiktok' }"
                                     @click="toPage('https://tiktok.com/@r4dy.a')"
-                                    @mouseover="logoHandle('I make coding timelapse videos', 'tiktok')"
+                                    @mouseenter="logoHandle('I make coding timelapse videos', 'tiktok')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-tiktok"></i></div>
-                                <div class="logo github" :class="{ 'bounce': state.logoBounce == 'github' }"
+                                <div class="logo github" :class="{ 'jump': state.logoBounce == 'github' }"
                                     @click="toPage('https://github.com/RadyaI')"
-                                    @mouseover="logoHandle(`Don't judge my GH stats ^^`, 'github')"
+                                    @mouseenter="logoHandle(`Don't judge my GH stats ^^`, 'github')"
                                     @mouseleave="stopLogoHandle()"><i class="bi bi-github"></i></div>
                             </div>
-                            <div class="wood">
+                            <div class="wood animate__animated animate__bounceInRight"
+                                :class="{ 'animate__bounceOutRight': state.onSwitch }">
                                 <div class="wood2"></div>
                             </div>
                         </div>
-                        <div class="blog" :class="{ 'blogUp': state.blogUp }"
+                        <div class="blog animate__animated animate__bounceInUp"
+                            :class="{ 'blogUp': state.blogUp, 'animate__bounceOutDown': state.onSwitch }"
                             @click="toPage('https://medium.com/@radyaiftikhar')">
                             <div class="blog-bg">
                                 <div class="text" @mouseover="blogHandle(), play()"
@@ -79,25 +88,26 @@
 </template>
 
 <script setup>
+import { useSound } from '@vueuse/sound'
+import { onMounted, reactive } from 'vue'
+import Loading from '@/components/loading.vue'
+import { useRouter } from 'vue-router'
+import 'animate.css'
+
 import popUp1 from '@/assets/sound/popUp1.mp3'
 
 import homeDefaultImg from '@/public/img/homeDefault.png'
 import homeHoverImg from '@/public/img/homeHover.png'
 import homeAboutMe from '@/public/img/homeAboutMe.png'
 
-import nuxtIcon from '../public/img/nuxt.png'
-import jsIcon from '../public/img/javascript.png'
-import firebaseIcon from '../public/img/firebase.png'
+import nuxtIcon from '@/public/img/nuxt.png'
+import jsIcon from '@/public/img/javascript.png'
+import firebaseIcon from '@/public/img/firebase.png'
 
 
 import pcDesk from '@/public/gif/pcDesk.gif'
 import pcDeskThumb from '@/public/gif/pcDeskThumb.png'
 
-
-import { useSound } from '@vueuse/sound'
-import { onMounted, reactive } from 'vue';
-import Loading from '../components/loading.vue'
-import { useRouter } from 'vue-router'
 
 useHead({
     title: 'Radya - Home',
@@ -117,12 +127,12 @@ const router = useRouter()
 const state = reactive({
     title: "Radya",
     dialog: null,
+    onSwitch: false,
     img: {
         swingImg: true,
         bounceImgDefault: false,
         homeDefault: homeDefaultImg,
         homeAboutMe: homeAboutMe,
-
         pcDesk: pcDeskThumb
     }
 })
@@ -185,6 +195,14 @@ function toWork() {
 
 function toPage(link) {
     window.open(link, '_blank')
+}
+
+function switchPage(route) {
+    state.onSwitch = true
+    setTimeout(() => {
+        state.onSwitch = false
+        router.push(route)
+    }, 1500);
 }
 
 onMounted(() => {
