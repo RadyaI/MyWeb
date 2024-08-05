@@ -329,6 +329,7 @@
 @media only screen and (max-width:750px){
   .text-bg h2{
     font-size: 4rem;
+    letter-spacing: 1px;
   }
   .text-bg .bg-1{display: none;}
   .text-bg .bg-2{display: none;}

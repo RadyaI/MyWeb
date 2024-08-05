@@ -193,7 +193,7 @@ function stopBlogHandle() {
 }
 
 function toWork() {
-    router.push('/work')
+    switchPage('work')
 }
 
 function toPage(link) {
@@ -205,7 +205,7 @@ function switchPage(route) {
     setTimeout(() => {
         state.onSwitch = false
         router.push(route)
-    }, 1500);
+    }, 1000);
 }
 
 onMounted(() => {
