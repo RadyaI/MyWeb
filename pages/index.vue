@@ -10,7 +10,7 @@
                         <div class="card animate__animated animate__bounceInDown"
                             :class="{ 'animate__bounceOutUp': state.onSwitch }"> <img
                                 :class="{ 'swing': state.img.swingImg }" :src="state.img.homeAboutMe" alt="about me"
-                                @click="switchPage('about')"
+                                @click="switchPage('https://about.radya.fun')"
                                 @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
                                 @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false">
                         </div>
@@ -193,7 +193,7 @@ function stopBlogHandle() {
 }
 
 function toWork() {
-    switchPage('work')
+    switchPage('https://work.radya.fun')
 }
 
 function toPage(link) {
@@ -204,7 +204,7 @@ function switchPage(route) {
     state.onSwitch = true
     setTimeout(() => {
         state.onSwitch = false
-        router.push(route)
+        location.href = route
     }, 1000);
 }
 
