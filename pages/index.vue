@@ -209,10 +209,18 @@ function switchPage(route) {
 }
 
 onMounted(() => {
-    setTimeout(() => {
-        state.stopSlide = true
-    }, 500);
-})
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        setTimeout(() => {
+            window.location.href = 'https://about.radya.fun';
+        }, 1000); // Redirect setelah 1 detik
+    } else {
+        setTimeout(() => {
+            state.stopSlide = true;
+        }, 500);
+    }
+});
 
 </script>
 
