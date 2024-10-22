@@ -10,7 +10,7 @@
                         <div class="card animate__animated animate__bounceInDown"
                             :class="{ 'animate__bounceOutUp': state.onSwitch }"> <img
                                 :class="{ 'swing': state.img.swingImg }" :src="state.img.homeAboutMe" alt="about me"
-                                @click="switchPage('https://about.radya.fun')"
+                                @click="switchPage('https://radya.fun')"
                                 @mouseover="handleMouseOver('Want to know about me?'), play(), state.img.swingImg = true"
                                 @mouseleave="handleMouseLeave(), stop(), state.img.swingImg = false">
                         </div>
@@ -193,7 +193,7 @@ function stopBlogHandle() {
 }
 
 function toWork() {
-    switchPage('https://work.radya.fun')
+    switchPage('https://radya.fun')
 }
 
 function toPage(link) {
@@ -213,7 +213,7 @@ onMounted(() => {
     
     if (isMobile) {
         setTimeout(() => {
-            window.location.href = 'https://about.radya.fun';
+            window.location.href = 'https://radya.fun';
         }, 1000); // Redirect setelah 1 detik
     } else {
         setTimeout(() => {
